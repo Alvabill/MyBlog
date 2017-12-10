@@ -21,7 +21,7 @@ public class ArticleDaoImpl implements ArticleDao{
 	public void add(Article article) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "insert into article(title,`reads`,cre_time,content,uid,cate_name)values(?,?,?,?,?,?)";
+		String sql = "insert into article(title,`reads`,cre_time,content,uid,cate_name,articleURL)values(?,?,?,?,?,?,?)";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -31,6 +31,7 @@ public class ArticleDaoImpl implements ArticleDao{
 			ps.setString(4, article.getContent());
 			ps.setInt(5, article.getUid());
 			ps.setString(6, article.getCate_name());
+			ps.setString(7, article.getArticleURL());
 			ps.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -123,7 +124,7 @@ public class ArticleDaoImpl implements ArticleDao{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Article atc = null;
-		String sql = "select title,reads,cre_time,cate_name from article where artid=?";
+		String sql = "select title,`reads`,cre_time,cate_name,content,articleURL from article where artid=?";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -135,6 +136,8 @@ public class ArticleDaoImpl implements ArticleDao{
 				atc.setReads(rs.getInt(2));
 				atc.setCre_time(rs.getDate(3));
 				atc.setCate_name(rs.getString(4));
+				atc.setContent(rs.getString(5));
+				atc.setArticleURL(rs.getString(6));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -153,7 +156,7 @@ public class ArticleDaoImpl implements ArticleDao{
 		ResultSet rs = null;
 		Article atc = null;
 		List<Article> articles = new ArrayList<Article>();
-		String sql = "select title,reads,cre_time from article where cate_name=?";
+		String sql = "select title,`reads`,cre_time,content,articleURL from article where cate_name=?";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -164,6 +167,8 @@ public class ArticleDaoImpl implements ArticleDao{
 				atc.setTitle(rs.getString(1));
 				atc.setReads(rs.getInt(2));
 				atc.setCre_time(rs.getDate(3));
+				atc.setContent(rs.getString(4));
+				atc.setArticleURL(rs.getString(5));
 				articles.add(atc);
 			}
 		}catch(SQLException e){
@@ -185,7 +190,7 @@ public class ArticleDaoImpl implements ArticleDao{
 		ResultSet rs = null;
 		Article atc = null;
 		List<Article> articles = new ArrayList<Article>();
-		String sql = "select title,reads,cre_time,cate_name from article";
+		String sql = "select title,`reads`,cre_time,cate_name,content,articleURL from article";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -196,6 +201,8 @@ public class ArticleDaoImpl implements ArticleDao{
 				atc.setReads(rs.getInt(2));
 				atc.setCre_time(rs.getDate(3));
 				atc.setCate_name(rs.getString(4));
+				atc.setContent(rs.getString(5));
+				atc.setArticleURL(rs.getString(6));
 				articles.add(atc);
 			}
 		}catch(SQLException e){

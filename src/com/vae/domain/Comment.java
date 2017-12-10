@@ -1,10 +1,10 @@
 package com.vae.domain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Comment{
 	private int commentid;
-	private Date commentdate;
+	private Timestamp commentdate;
 	private String comment_content;
 	private int art_id;
 	private int uid;
@@ -21,11 +21,11 @@ public class Comment{
 		return commentid;
 	}
 	
-	public void setCommentdate(Date commentdate) {
+	public void setCommentdate(Timestamp commentdate) {
 		this.commentdate = commentdate;
 	}
 	
-	public Date getCommentdate() {
+	public Timestamp getCommentdate() {
 		return commentdate;
 	}
 

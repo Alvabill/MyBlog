@@ -10,6 +10,7 @@ public class Article{
 	private String content;  //文章内容
 	private int uid;  //用户id
 	private String cate_name;  //分类名称
+	private String articleURL; //文章链接
 	
 	private int type;
 	
@@ -17,7 +18,7 @@ public class Article{
 		super();
 	}
 	
-	public Article(String title, int reads, Date cre_time, String content, int uid, String cate_name) {
+	public Article(String title, int reads, Date cre_time, String content, int uid, String cate_name, String articleURL) {
 		super();
 		this.title = title;
 		this.reads = reads;
@@ -25,6 +26,7 @@ public class Article{
 		this.content = content;
 		this.uid = uid;
 		this.cate_name = cate_name;
+		this.articleURL = articleURL;
 	}
 	
 	public Article(int type, String str, int artid) {
@@ -104,4 +106,13 @@ public class Article{
 	public int getType() {
 		return type;
 	}
+	
+	public void setArticleURL(String articleURL) {
+		this.articleURL = articleURL;
+	}
+	
+	public String getArticleURL() {
+		return articleURL;
+	}
+	
 }

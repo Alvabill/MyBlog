@@ -21,7 +21,7 @@ public class CommentDaoImol implements CommentDao{
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setDate(1, cm.getCommentdate());
+			ps.setTimestamp(1, cm.getCommentdate());
 			ps.setString(2, cm.getComment_content());
 			ps.setInt(3, cm.getArt_id());
 			ps.setInt(4, cm.getUid());
@@ -58,7 +58,7 @@ public class CommentDaoImol implements CommentDao{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Comment cm = null;
-		String sql = "select commentdate,comment_content,art_id,uid from person where commentid=?";
+		String sql = "select commentdate,comment_content,art_id,uid from comment where commentid=?";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -66,7 +66,7 @@ public class CommentDaoImol implements CommentDao{
 			rs = ps.executeQuery();
 			if(rs.next()){
 				cm = new Comment();
-				cm.setCommentdate(rs.getDate(1));
+				cm.setCommentdate(rs.getTimestamp(1));
 				cm.setComment_content(rs.getString(2));
 				cm.setArt_id(rs.getInt(3));
 				cm.setUid(rs.getInt(4));
@@ -88,7 +88,7 @@ public class CommentDaoImol implements CommentDao{
 		ResultSet rs = null;
 		Comment cm = null;
 		List<Comment> comments = new ArrayList<Comment>(); 
-		String sql = "select commentdate,comment_content,uid from person where art_id=?";
+		String sql = "select commentdate,comment_content,uid from comment where art_id=?";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -96,9 +96,9 @@ public class CommentDaoImol implements CommentDao{
 			rs = ps.executeQuery();
 			while(rs.next()){
 				cm = new Comment();
-				cm.setCommentdate(rs.getDate(1));
+				cm.setCommentdate(rs.getTimestamp(1));
 				cm.setComment_content(rs.getString(2));
-				cm.setUid(rs.getInt(4));
+				cm.setUid(rs.getInt(3));
 				cm.setArt_id(art_id);
 				comments.add(cm);
 			}

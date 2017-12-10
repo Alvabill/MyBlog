@@ -1,0 +1,218 @@
+* {
+  font-size: 14px;
+  font-family: "SF Pro SC", "HanHei SC", "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+}
+
+li {
+  list-style-type: none;
+}
+
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+}
+
+/*header start*/
+#header {
+  background: rgb(44, 62, 80);
+}
+
+#nav {
+  overflow: auto;
+}
+
+.wrapper {
+  min-width: 300px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+#nav a {
+  color: white;
+}
+.nav-logo {
+  width: 5rem;
+  float: left;
+  line-height: 5rem;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.nav-logo span {
+  font-size: 1.5rem;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.navbar {
+  float: right;
+  text-align: center;
+}
+.navbar ul {
+  margin: 0;
+  padding: 0;
+}
+.navbar li {
+  float: left;
+  width: 5rem;
+  line-height: 5rem;
+  vertical-align: middle;
+}
+/*header end*/
+
+/*section start*/
+/*主页*/
+.index-post {
+  margin: 1rem 5px;
+}
+.post-title {
+  font-size: 3rem;
+  color: rgb(85, 85, 85);
+}
+
+.post-meta span {
+  display: inline-block;
+  padding-right: 1rem;
+  margin-right: 5px;
+  border-right: 1px rgb(153, 153, 153) solid;
+  color: rgb(153, 153, 153);
+}
+
+.body-content {
+  font-size: 2rem;
+  color: rgb(85, 85, 85);
+}
+
+.post-button {
+  background: rgb(44, 62, 80);
+  padding: 1.2rem 1.2rem;
+  width: 5.5rem;
+}
+
+.post-button a {
+  color: white;
+}
+
+/*blog页面*/
+.blog-title {
+  margin-top: 5rem;
+  text-align: center;
+  font-size: 2rem;
+  color: rgb(85, 85, 85);
+}
+.blog-meta {
+  text-align: center;
+}
+.blog-meta span {
+  display: inline-block;
+  padding-right: 1rem;
+  margin-right: 5px;
+  border-right: 1px rgb(153, 153, 153) solid;
+  color: rgb(153, 153, 153);
+}
+.blog-body {
+  max-width: 800px;
+  margin: 5rem auto;
+  text-indent: 2rem;
+  color: rgb(85, 85, 85);
+}
+
+/*comments*/
+.comments {
+  overflow: auto;
+  max-width: 800px;
+  margin: 5rem auto;
+  color: rgb(85, 85, 85);
+  background: rgb(245, 245, 245);
+  border-radius: 5px;
+}
+.comment-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  float: left;
+  margin: 0.5rem 3rem;
+}
+.comment-login {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  float: right;
+  margin: 0.5rem 3rem;
+}
+.comment-textarea {
+  clear: both;
+  margin: 2rem;
+  text-align: center;
+}
+.comment-textarea input {
+  width: 700px;
+  color: gray;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+  border: 1px rgb(67, 152, 237) solid;
+}
+
+.comment-data {
+  margin:0 auto;
+  max-width: 800px;
+}
+.comment-data-news {
+  border-left: 5px solid rgb(67, 152, 237);
+  color: black;
+  font-weight: 800;
+  font-size: 2rem;
+  padding-left: 3px;
+}
+
+.comment-data-item {
+  position: relative;
+  height: 120px;
+  border-bottom: dashed 1px gray;
+  margin-bottom: 1rem;
+}
+.comment-data-item-img {
+  position: absolute;
+  width: 3rem;
+  border-radius: 3rem;
+  top: 5px;
+  left: 5px;
+}
+.comment-data-item-name {
+  position: absolute;
+  left: 5rem;
+  top: 0;
+  color: rgb(67, 152, 237);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.comment-data-item-time {
+  position: absolute;
+  top: 0;
+  right: 2rem;
+  color: rgb(213, 213, 214);
+  font-size: 1.2rem;
+}
+.comment-data-item-content {
+  position: absolute;
+  top: 2rem;
+  left: 5rem;
+  font-size: 1.2rem;
+}
+/*section end*/
+
+/*footer start*/
+#footer {
+  background: rgb(44, 62, 80);
+}
+#footer p {
+  color: white;
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 2rem 0;
+}
+#footer a {
+  color: white;
+  font-size: 0.8rem;
+}
+/*footer end*/
