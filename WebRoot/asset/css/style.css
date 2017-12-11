@@ -76,7 +76,9 @@ a:link, a:visited, a:hover, a:active {
   border-right: 1px rgb(153, 153, 153) solid;
   color: rgb(153, 153, 153);
 }
-
+.post-meta span i {
+  margin-right: 5px;
+}
 .body-content {
   font-size: 2rem;
   color: rgb(85, 85, 85);
@@ -108,6 +110,9 @@ a:link, a:visited, a:hover, a:active {
   margin-right: 5px;
   border-right: 1px rgb(153, 153, 153) solid;
   color: rgb(153, 153, 153);
+}
+.blog-meta span i {
+  margin-right: 5px;
 }
 .blog-body {
   max-width: 800px;

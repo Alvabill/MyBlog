@@ -14,7 +14,7 @@
   if(!atcList.isEmpty()){
 	  for(Article article:atcList){
 		  item.append(
-						  String.format("<div class='index-post'><header class='post-header'><h2 class='post-title'>%s</h2><div class='post-meta'><span class='post-time'>%s</span><span class='post-category'>%s</span> <span class='post-reads'>%d</span></div></header> <div class='post-body'><p class='body-content'>%s</p><div class='post-button'><a class='btn' href='%s'>阅读全文 >></a></div> </div></div>",
+						  String.format("<div class='index-post'><header class='post-header'><h2 class='post-title'>%s</h2><div class='post-meta'><span class='post-time'><i class='fa fa-calendar-o'></i>%s</span><span class='post-category'><i class='fa fa-folder-o'></i>%s</span> <span class='post-reads'><i class='fa fa-eye'></i>%d</span></div></header> <div class='post-body'><p class='body-content'>%s</p><div class='post-button'><a class='btn' href='%s'>阅读全文 >></a></div> </div></div>",
 						  article.getTitle(),
 						  article.getCre_time().toString(),
 						  article.getCate_name(),
@@ -43,13 +43,13 @@
   <header id="header">
     <nav id="nav" class="wrapper">
       <div class="nav-logo">
-        <a href="#"><span>MyBlog</span></a>
+        <a href="/myBlog"><span>MyBlog</span></a>
       </div>
       <div class="navbar">
         <ul>
-          <li><a href="#"><i class="fa fa-home fa-fw"></i>&nbsp; 主页</a></li>
-          <li><a href="#"><i class="fa fa-home fa-fw"></i>&nbsp; 分类</a></li>
-          <li><a href="#"><i class="fa fa-home fa-fw"></i>&nbsp; 关于</a></li>
+          <li><a href="/myBlog"><i class="fa fa-home fa-fw"></i>&nbsp; 主页</a></li>
+          <li><a href="#"><i class="fa fa-th fa-fw"></i>&nbsp; 分类</a></li>
+          <li><a href="#"><i class="fa fa-user fa-fw"></i>&nbsp; 关于</a></li>
         </ul>
       </div>
     </nav>

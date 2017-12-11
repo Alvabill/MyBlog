@@ -79,7 +79,7 @@ public class ArticleDaoImpl implements ArticleDao{
 	public void updateReads(Article article) throws SQLException{
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "update article set cre_time=? where artid=?";
+		String sql = "update article set `reads`=? where artid=?";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
