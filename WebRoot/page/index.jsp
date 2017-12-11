@@ -10,7 +10,7 @@
   request.setCharacterEncoding("utf-8");
   String str = request.getParameter("id");
   int artID = Integer.parseInt(str);
-  
+
   ArticleDao atcDao = DaoFactory.getArticleDaoInstance();
   Article article = atcDao.findById(artID);
   String title = article.getTitle();
@@ -18,7 +18,7 @@
   String cre_time = article.getCre_time().toString();
   String cate_name = article.getCate_name();
   String content = article.getContent();
-  
+
   article = new Article(reads,artID);
   atcDao.updateReads(article);
 
@@ -93,8 +93,8 @@
     <%    break;
       }
     %>
-    
-    
+
+
      </div>
   </section>
   <hr style="width:750px;color:gray">
@@ -103,9 +103,11 @@
     <span class="comment-number">
       <%=commentNumber %>条评论
     </span>
-    <span class="comment-login">登录</span>
+    <a href="../login.jsp"><span class="comment-login">登录</span></a>
+
     <div class="comment-textarea">
      <input id="comment-content" type="text" name="" value="我来说两句..." onkeypress="EnterPress(event)">
+     <input type="button" name="btn" value="提交" onclick="BtnAjax()">
     </div>
   </div>
   <div class="comment-data">

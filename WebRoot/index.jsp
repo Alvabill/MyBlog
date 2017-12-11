@@ -31,7 +31,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>myBlog--主页</title>
+  <title>myBlog -- 主页</title>
 
 
   <link rel="stylesheet" href="asset/css/font-awesome.min.css">
