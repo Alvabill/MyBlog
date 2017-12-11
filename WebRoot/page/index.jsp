@@ -41,9 +41,9 @@
 
   <link rel="stylesheet" href="../asset/css/font-awesome.min.css">
   <link rel="stylesheet" href="../asset/css/style.css">
-  <%-- <script src="../asset/js/main.js"></script> --%>
+  <script src="../asset/js/main.js"></script>
   <script type="text/javascript">
-    <%@ include file="../asset/js/main.js"%>
+    <%@ include file="../asset/js/JSPmain.js"%>
   </script>
 </head>
 <body>
@@ -106,7 +106,7 @@
     <a href="../login.jsp"><span class="comment-login">登录</span></a>
 
     <div class="comment-textarea">
-     <input id="comment-content" type="text" name="" value="我来说两句..." onkeypress="EnterPress(event)">
+     <input id="comment-content" type="text" name="" placeholder="我来说两句..." onkeypress="EnterPress(event)">
      <input type="button" name="btn" value="提交" onclick="BtnAjax()">
     </div>
   </div>

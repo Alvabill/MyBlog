@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%
-       CategoryDao cgDao = DaoFactory.
     
+<%@ page import="java.util.*" %>
+<%@ page import="com.vae.domain.*" %>
+<%@ page import="com.vae.dao.*" %>
+    <%
+       
     %>
     
 <!DOCTYPE html>
