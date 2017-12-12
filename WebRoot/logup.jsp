@@ -13,26 +13,28 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>MyBlog -- 用户登录</title>
+	<title>MyBlog -- 用户注册</title>
 
 	<link rel="stylesheet" href="asset/css/font-awesome.min.css">
     <link rel="stylesheet" href="asset/css/login.css">
 </head>
 <body>
 
-  	<h1>Sign In For Comment</h1>
+  	<h1>Sign Up</h1>
   		<div class="app-block">
   		  <div class="cube">
-  			    <img src="asset/img/cube.png" class="img-responsive" alt="">
+  			  <a href="#">
+  			    <img src="asset/img/default.png" class="img-responsive" alt="">
+          </a>
           </div>
-  			<form action="logStatus.jsp" method="post">
+  			<form action="logStatus.jsp" method="post" enctype="multipart/form-data">
+          <input id="upload" type="file" name="img" value="img">
   				<input class="text" value="Email address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email address';}" type="text">
+          <input class="text" value="nickname" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'nickname';}" type="text">
   				<input value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" type="password">
-  				<div class="submit"><input onclick="myFunction()" value="Sign in" type="submit"></div>
+  				<div class="submit"><input onclick="myFunction()" value="Sign up" type="submit"></div>
   				<div class="clear"></div>
-  				<p><a href="#">Forgot Password ?</a></p>
   			</form>
-  			<p class="sign">New here ? <a href="logup.jsp"> Sign Up</a></p>
 
   		</div>
   	<!--start-copyright-->
