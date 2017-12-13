@@ -2,10 +2,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.*,java.net.*" %>
 <%@ page import="com.vae.domain.*" %>
 <%@ page import="com.vae.dao.*" %>
 
+<%
+    String Role_code = "2";
+    int uid = 0;
+    Cookie cookie = null;
+    Cookie[] cookies = null;
+    // 获取cookies的数据,是一个数组
+    cookies = request.getCookies();
+    if( cookies != null ){
+       for (int i = 0; i < cookies.length; i++){
+          cookie = cookies[i];
+          if(cookie.getName().equals("Role_code")){
+        	  Role_code = URLDecoder.decode(cookie.getValue(), "utf-8");
+          }
+          if(cookie.getName().equals("member")){
+        	  String str = URLDecoder.decode(cookie.getValue(), "utf-8");
+          	  uid = Integer.parseInt(str);
+          }
+       }
+    }
+%>
 <%
   request.setCharacterEncoding("utf-8");
   String str = request.getParameter("id");

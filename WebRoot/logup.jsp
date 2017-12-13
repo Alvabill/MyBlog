@@ -29,9 +29,9 @@
           </div>
   			<form action="logStatus.jsp" method="post" enctype="multipart/form-data">
           <input id="upload" type="file" name="img" value="img">
-  				<input class="text" value="Email address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email address';}" type="text">
-          <input class="text" value="nickname" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'nickname';}" type="text">
-  				<input value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" type="password">
+          		<input class="text" name="nickname" type="text" placeholder="Nickname">
+  				    <input class="text" name="email" type="text" placeholder="Email address">
+              <input name="password" type="password"  placeholder="Password">
   				<div class="submit"><input onclick="myFunction()" value="Sign up" type="submit"></div>
   				<div class="clear"></div>
   			</form>

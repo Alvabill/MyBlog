@@ -27,7 +27,7 @@ function BtnAjax(){
   function sendRequest() {
       createXMLHttpRequest();
       var content = document.getElementById("comment-content").value;
-      var url = "ajax.jsp?artID="+'<%=artID%>'+"&uid="+1+"&content="+content;
+      var url = "ajax.jsp?artID="+'<%=artID%>'+"&uid="+uid+"&content="+content;
       XMLHttpReq.open("GET", url, true);
       XMLHttpReq.onreadystatechange = processResponse;//指定响应函数
       XMLHttpReq.send(null);  // 发送请求
@@ -52,9 +52,9 @@ function BtnAjax(){
        Collections.reverse(cmList);
        for(Comment comment:cmList){
          commentNumber++;
-             int uid = comment.getUid();
+             int userid = comment.getUid();
              MemberDao mbDao = DaoFactory.getMemberDaoInstance();
-             Member mb = mbDao.findById(uid);
+             Member mb = mbDao.findById(userid);
            comment_item.append(
              String.format(" <div class='comment-data-item'><img class='comment-data-item-img' src='%s'><span class='comment-data-item-name'>%s</span><span class='comment-data-item-time'>%s</span><p class='comment-data-item-content'>%s</p></div>",
               mb.getUrl(),

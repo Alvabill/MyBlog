@@ -5,10 +5,11 @@
 <%@ page import="com.vae.domain.*" %>
 <%@ page import="com.vae.dao.*" %>
 
-    <%
 
-    %>
+	<%
 
+
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +26,9 @@
   		  <div class="cube">
   			    <img src="asset/img/cube.png" class="img-responsive" alt="">
           </div>
-  			<form action="logStatus.jsp" method="post">
-  				<input class="text" value="Email address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email address';}" type="text">
-  				<input value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" type="password">
+  			<form action="loginStatus.jsp" method="post">
+  				<input class="text" name="email" placeholder="Email address" type="text">
+  				<input name="password" placeholder="Password" type="password">
   				<div class="submit"><input onclick="myFunction()" value="Sign in" type="submit"></div>
   				<div class="clear"></div>
   				<p><a href="#">Forgot Password ?</a></p>
