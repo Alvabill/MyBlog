@@ -13,14 +13,16 @@
 	String nickname = null;
 	String password = null;
 	String imgUrl = null;
-	String fileFullName = null, fileRelaName = null;
+	String fileFullName = null, fileRelaName = "default.png";
 
 	MemberDao mbDao = DaoFactory.getMemberDaoInstance();
 	Member mb = new Member();
 	List<Member> mbList = mbDao.findAll();
 	int uid = 1;
-	for(Member member:mbList){
-		uid++;
+	if(!mbList.isEmpty()){
+		for(Member member:mbList){
+			uid++;
+		}
 	}
 
 %>
@@ -65,8 +67,8 @@
 					fileFullName = application.getRealPath("/asset/img/")
 								+System.getProperty("file.separator")
 								+fileRelaName;
-					out.print(new File(fileFullName).getAbsolutePath());
-					out.print("<br>");
+					//out.print(new File(fileFullName).getAbsolutePath());
+					//out.print("<br>");
 					dfi.write(new File(fileFullName));
 				}
 			}
@@ -95,12 +97,6 @@
 		mb.setUrl(imgUrl);
 		mbDao.add(mb);
 		msg ="注册成功！";
-		Cookie cookie = new Cookie("Role_code","2");
-		cookie.setMaxAge(-1);
-		response.addCookie(cookie);
-		cookie = new Cookie("member",""+uid);
-		cookie.setMaxAge(-1);
-		response.addCookie(cookie);
 
 	}
 	%>
@@ -118,7 +114,7 @@
     <%if(hasSignup){%>
 	    setTimeout("self.location=document.referrer",1500);
     <%} else {%>
-    	setTimeout("history.go(-2)",1500);
+    	setTimeout("window.location.href('login.jsp')",1500);
     <%}%>
     </script>
 </body>

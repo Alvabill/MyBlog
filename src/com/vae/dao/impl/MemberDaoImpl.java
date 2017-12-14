@@ -17,7 +17,7 @@ public class MemberDaoImpl implements MemberDao{
 	public void add(Member mb) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "insert into member(role_code,password,account,url,nickname,sex,birthday)values(?,?,?,?,?,?,?)";
+		String sql = "insert into member(role_code,password,account,url,nickname)values(?,?,?,?,?)";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -26,8 +26,6 @@ public class MemberDaoImpl implements MemberDao{
 			ps.setString(3, mb.getAccount());
 			ps.setString(4, mb.getUrl());
 			ps.setString(5, mb.getNickname());
-			ps.setInt(6, mb.getSex());
-			ps.setDate(7, mb.getBirthday());
 			ps.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -41,7 +39,7 @@ public class MemberDaoImpl implements MemberDao{
 	public void update(Member mb) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "update member set role_code=?,password=?,account=?,url=?,nickname=?,sex=?,birthday=? where uid=?";
+		String sql = "update member set role_code=?,password=?,account=?,url=?,nickname=? where uid=?";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -50,8 +48,6 @@ public class MemberDaoImpl implements MemberDao{
 			ps.setString(3, mb.getAccount());
 			ps.setString(4, mb.getUrl());
 			ps.setString(5, mb.getNickname());
-			ps.setInt(6, mb.getSex());
-			ps.setDate(7, mb.getBirthday());
 			ps.setInt(8, mb.getUid());
 			ps.executeUpdate();
 		}catch(SQLException e){
@@ -86,7 +82,7 @@ public class MemberDaoImpl implements MemberDao{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Member mb = null;
-		String sql = "select role_code,password,account,url,nickname,sex,birthday from member where uid=?";
+		String sql = "select role_code,password,account,url,nickname from member where uid=?";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -99,8 +95,6 @@ public class MemberDaoImpl implements MemberDao{
 				mb.setAccount(rs.getString(3));
 				mb.setUrl(rs.getString(4));
 				mb.setNickname(rs.getString(5));
-				mb.setSex(rs.getInt(6));
-				mb.setBirthday(rs.getDate(7));
 				mb.setUid(uid);
 			}
 		}catch(SQLException e){
@@ -119,7 +113,7 @@ public class MemberDaoImpl implements MemberDao{
 		ResultSet rs = null;
 		Member mb = null;
 		List<Member> members = new ArrayList<Member>();
-		String sql = "select role_code,password,account,url,nickname,sex,birthday from member";
+		String sql = "select role_code,password,account,url,nickname from member";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -131,8 +125,6 @@ public class MemberDaoImpl implements MemberDao{
 				mb.setAccount(rs.getString(3));
 				mb.setUrl(rs.getString(4));
 				mb.setNickname(rs.getString(5));
-				mb.setSex(rs.getInt(6));
-				mb.setBirthday(rs.getDate(7));
 				members.add(mb);
 			}
 		}catch(SQLException e){

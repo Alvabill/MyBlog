@@ -8,7 +8,7 @@
 
 <%
     String Role_code = "2";
-    int uid = 0;
+    int uid = 1;
     Cookie cookie = null;
     Cookie[] cookies = null;
     // 获取cookies的数据,是一个数组
@@ -26,7 +26,7 @@
        }
     }
 %>
-<%
+<%//文章接口
   request.setCharacterEncoding("utf-8");
   String str = request.getParameter("id");
   int artID = Integer.parseInt(str);
@@ -43,7 +43,7 @@
   atcDao.updateReads(article);
 
 %>
-<%
+<% //评论接口
    CommentDao cmDao = DaoFactory.getCommentDaoInstance();
    List<Comment> cmList = cmDao.findByArtId(artID);
    int commentNumber = 0;
@@ -53,17 +53,111 @@
 	   }
    }
 %>
+<%//人员接口
+	MemberDao mbDao = DaoFactory.getMemberDaoInstance();
+	List<Member> mbList = mbDao.findAll();
+	Member mb = new Member();
+%>
+<%//访问记录接口
+	MemrecordDao mrDao = DaoFactory.getMemrecordDaoInstance();
+	Memrecord mr = new Memrecord();
+	if(uid > 1){
+		Member mb1 = mbDao.findById(uid);
+		mr.setIp(mb1.getAccount());
+		mr.setUid(uid);
+		java.util.Date ud = new java.util.Date();
+    	java.sql.Timestamp visit_time = new java.sql.Timestamp(ud.getTime());
+		mr.setVisit_time(visit_time);
+		mr.setVisit_uid(artID);
+		mrDao.add(mr);
+	}
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>blog</title>
+  <title>blog -- 内容</title>
 
   <link rel="stylesheet" href="../asset/css/font-awesome.min.css">
   <link rel="stylesheet" href="../asset/css/style.css">
   <script src="../asset/js/main.js"></script>
   <script type="text/javascript">
-    <%@ include file="../asset/js/JSPmain.js"%>
+    function EnterPress(e){
+  var e = e || window.event;
+  if(e.keyCode == 13){
+    BtnAjax();
+  }
+
+}
+
+function BtnAjax(){
+  var XMLHttpReq;
+  //创建XMLHttpRequest对象
+  function createXMLHttpRequest() {
+      if(window.XMLHttpRequest) { //Mozilla 浏览器
+          XMLHttpReq = new XMLHttpRequest();
+      }
+      else if (window.ActiveXObject) { // IE浏览器
+          try {
+              XMLHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+          } catch (e) {
+              try {
+                  XMLHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+              } catch (e) {}
+          }
+      }
+  }
+  //发送请求函数
+  function sendRequest() {
+      createXMLHttpRequest();
+      var content = document.getElementById("comment-content").value;
+      var url = "ajax.jsp?artID="+'<%=artID%>'+"&uid="+'<%=uid%>'+"&content="+content;
+      XMLHttpReq.open("GET", url, true);
+      XMLHttpReq.onreadystatechange = processResponse;//指定响应函数
+      XMLHttpReq.send(null);  // 发送请求
+  }
+  // 处理返回信息函数
+  function processResponse() {
+      if (XMLHttpReq.readyState == 4) { // 判断对象状态
+          if (XMLHttpReq.status == 200) { // 信息已经成功返回，开始处理信息
+              Display();
+
+          } else { //页面不正常
+              window.alert("请先登录~");
+          }
+      }
+  }
+  function Display() {
+    <%
+      StringBuilder comment_item = new StringBuilder("");
+      cmList = cmDao.findByArtId(artID);
+      commentNumber = 0;
+      if(!cmList.isEmpty()){
+       Collections.reverse(cmList);
+       for(Comment comment:cmList){
+         commentNumber++;
+             int userid = comment.getUid();
+             mb = mbDao.findById(userid);
+           comment_item.append(
+             String.format(" <div class='comment-data-item'><img class='comment-data-item-img' src='%s'><span class='comment-data-item-name'>%s</span><span class='comment-data-item-time'>%s</span><p class='comment-data-item-content'>%s</p></div>",
+              mb.getUrl(),
+              mb.getNickname(),
+              comment.getCommentdate().toString(),
+              comment.getComment_content()
+           ));
+       }
+      }
+    %>
+      // var name = XMLHttpReq.responseXML.getElementsByTagName("name")[0].firstChild.nodeValue;
+      // var count = XMLHttpReq.responseXML.getElementsByTagName("count")[0].firstChild.nodeValue;
+//      document.getElementById("comment-items").innerHTML(<%=comment_item %>);
+  }
+
+  sendRequest();
+  document.getElementById("comment-content").value = "";
+}
+
   </script>
 </head>
 <body>
@@ -113,8 +207,10 @@
     <%    break;
       }
     %>
+     </div>
 
-
+     <div id="loginBtn" class="User">
+       <a href="../login.jsp"><i class="fa fa-user-o"></i></a>
      </div>
   </section>
   <hr style="width:750px;color:gray">
@@ -123,7 +219,7 @@
     <span class="comment-number">
       <%=commentNumber %>条评论
     </span>
-    <a href="../login.jsp"><span class="comment-login">登录</span></a>
+    <a href="../login.jsp"><span class="comment-login">切换账号</span></a>
 
     <div class="comment-textarea">
      <input id="comment-content" type="text" name="" placeholder="我来说两句..." onkeypress="EnterPress(event)">
@@ -150,5 +246,14 @@
       </p>
     </div>
   </footer>
+
+  <script type="text/javascript">
+    var el = document.getElementById("loginBtn");
+    var classVal = el.getAttribute('class');
+    <%if (uid <= 1){ %>
+      classVal = classVal.replace("User","Root");
+      el.setAttribute("class",classVal );
+    <%} %>
+  </script>
 </body>
 </html>

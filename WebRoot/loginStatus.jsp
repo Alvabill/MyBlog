@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="java.util.*"%>
+<%@ page import="java.util.*,java.net.*"%>
 <%@ page import="com.vae.domain.*" %>
 <%@ page import="com.vae.dao.*" %>
 
 <%
 	String email = null;
 	String password = null;
-	
+
 	MemberDao mbDao = DaoFactory.getMemberDaoInstance();
 	List<Member> mbList = mbDao.findAll();
 	Member mb = new Member();
+	int uid = 1;
 
 %>
 
@@ -31,14 +32,14 @@
 	request.setCharacterEncoding("utf-8");
 	email = request.getParameter("email");
 	password = request.getParameter("password");
-	
+
 	String msg = "";
-	int uid = -1;
 	boolean hasSignin = false, isSignin = false;
 	for(Member member:mbList){
-		if(member.getAccount().compareTo(email) == 0){
+    uid++;
+		if(member.getAccount().equals(email)){
 			hasSignin = true;
-			uid = member.getUid();
+      break;
 		}
 	}
 	if(hasSignin){
@@ -46,7 +47,7 @@
 	 		if(member.getPassword().equals(password)){
 	 			isSignin = true;
 	 			msg = "登录成功！";
-	
+
 	 			Cookie cookie = new Cookie("Role_code",member.getRole_code());
 	 			cookie.setMaxAge(-1);//关闭浏览器消除cookie
 	 			response.addCookie(cookie);
@@ -57,7 +58,7 @@
 		}
 		if(!isSignin)
  			msg = "密码错误！";
- 		
+
 	}else {
 		msg = "该账号尚未注册，请先注册~";
 	}
@@ -74,13 +75,12 @@
 
 	<script>
     <%if(hasSignin&&isSignin){%>
-	    setTimeout("self.location=document.referrer",1500);
+	    setTimeout('window.location.replace("/myBlog")',1500);
     <%} else if(hasSignin&&(!isSignin)){%>
     	setTimeout("history.go(-1)",1500);
     <%} else {%>
     	setTimeout("window.location.href('logup.jsp')",1500);
     <%}%>
-    }
     </script>
 </body>
 </html>

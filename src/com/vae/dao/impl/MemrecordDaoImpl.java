@@ -22,7 +22,7 @@ public class MemrecordDaoImpl implements MemrecordDao{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, mr.getIp());
-			ps.setDate(2, mr.getVisit_time());
+			ps.setTimestamp(2, mr.getVisit_time());
 			ps.setInt(3, mr.getUid());
 			ps.setInt(4, mr.getVisit_uid());
 			ps.executeUpdate();
@@ -44,7 +44,7 @@ public class MemrecordDaoImpl implements MemrecordDao{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, mr.getIp());
-			ps.setDate(2, mr.getVisit_time());
+			ps.setTimestamp(2, mr.getVisit_time());
 			ps.setInt(3, mr.getUid());
 			ps.setInt(4, mr.getVisit_uid());
 			ps.executeUpdate();
@@ -89,7 +89,7 @@ public class MemrecordDaoImpl implements MemrecordDao{
 			if(rs.next()){
 				mr = new Memrecord();
 				mr.setIp(rs.getString(1));
-				mr.setVisit_time(rs.getDate(2));
+				mr.setVisit_time(rs.getTimestamp(2));
 				mr.setUid(rs.getInt(3));
 				mr.setVisit_uid(rs.getInt(4));
 			}
@@ -118,7 +118,7 @@ public class MemrecordDaoImpl implements MemrecordDao{
 			while(rs.next()){
 				mr = new Memrecord();
 				mr.setIp(rs.getString(1));
-				mr.setVisit_time(rs.getDate(2));
+				mr.setVisit_time(rs.getTimestamp(2));
 				mr.setVisit_uid(rs.getInt(3));
 				memrecords.add(mr);
 			}
@@ -147,7 +147,7 @@ public class MemrecordDaoImpl implements MemrecordDao{
 			while(rs.next()){
 				mr = new Memrecord();
 				mr.setIp(rs.getString(1));
-				mr.setVisit_time(rs.getDate(2));
+				mr.setVisit_time(rs.getTimestamp(2));
 				mr.setUid(rs.getInt(3));
 				memrecords.add(mr);
 			}
@@ -175,7 +175,7 @@ public class MemrecordDaoImpl implements MemrecordDao{
 			while(rs.next()){
 				mr = new Memrecord();
 				mr.setIp(rs.getString(1));
-				mr.setVisit_time(rs.getDate(2));
+				mr.setVisit_time(rs.getTimestamp(2));
 				mr.setVisit_uid(rs.getInt(3));
 				mr.setUid(rs.getInt(4));
 				memrecords.add(mr);

@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.*,java.net.*" %>
 <%@ page import="com.vae.domain.*" %>
 <%@ page import="com.vae.dao.*" %>
 
@@ -28,6 +28,26 @@
   }
 
 %>
+<%
+    String Role_code = "2";
+    int uid = 1;
+    Cookie cookie = null;
+    Cookie[] cookies = null;
+    // 获取cookies的数据,是一个数组
+    cookies = request.getCookies();
+    if( cookies != null ){
+       for (int i = 0; i < cookies.length; i++){
+          cookie = cookies[i];
+          if(cookie.getName().equals("Role_code")){
+        	  Role_code = URLDecoder.decode(cookie.getValue(), "utf-8");
+          }
+          if(cookie.getName().equals("member")){
+        	  String str = URLDecoder.decode(cookie.getValue(), "utf-8");
+          	  uid = Integer.parseInt(str);
+          }
+       }
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +58,11 @@
   <link rel="stylesheet" href="asset/css/font-awesome.min.css">
   <link rel="stylesheet" href="asset/css/style.css">
   <script src="asset/js/main.js"></script>
+  <style media="screen">
+    .Root{
+      padding: 1.4em 1.4em;
+    }
+  </style>
 </head>
 <body>
   <%-- header --%>
@@ -77,6 +102,10 @@
         </div>
       </div>
     </div> --%>
+    <%-- root --%>
+    <div id="rootUI" class="User">
+      <a href="/myBlog"><i class="fa fa-wrench fa-fw"></i></a>
+    </div>
   </section>
 
   <%-- footer --%>
@@ -85,5 +114,14 @@
       <p>Copyright © 2017 15352344. All Rights Reserved. <a href="index.jsp" title="myBlog" target="_blank">MyBlog</a></p>
     </div>
   </footer>
+
+  <script type="text/javascript">
+    var el = document.getElementById("rootUI");
+    var classVal = el.getAttribute('class');
+  	<%if (Role_code.equals("1")){ %>
+      classVal = classVal.replace("User","Root");
+      el.setAttribute("class",classVal );
+  	<%} %>
+  </script>
 </body>
 </html>

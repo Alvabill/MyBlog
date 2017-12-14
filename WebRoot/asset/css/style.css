@@ -221,3 +221,37 @@ a:link, a:visited, a:hover, a:active {
   font-size: 0.8rem;
 }
 /*footer end*/
+
+/*visibility ,Btn*/
+.Root {
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+  padding: 1.4em 1.6em;
+  text-decoration: none;
+  outline: none;
+  background-color: #fe4365;
+  border-radius: 3rem;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-box-shadow: 0 0 0 -2px white, 0 0 0 -1px #fe4365;
+  box-shadow: 0 0 0 -2px white, 0 0 0 -1px #fe4365;
+  border: none;
+  -webkit-transition: -webkit-box-shadow .3s;
+  transition: box-shadow .3s;
+}
+.Root a{
+  font-size: 1.5rem;
+  color: white;
+}
+.Root:hover, .Root:focus {
+  -webkit-box-shadow: 0 0 0 2px white, 0 0 0 4px #ff0364;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #ff0364;
+  -webkit-transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  -webkit-animation: gelatine 0.5s 1;
+  animation: gelatine 0.5s 1;
+}
+.User {
+  display: none;
+}

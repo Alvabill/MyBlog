@@ -1,6 +1,5 @@
 package com.vae.domain;
 
-import java.sql.Date;
 
 public class Member{
 	private int uid;
@@ -9,8 +8,6 @@ public class Member{
 	private String account;
 	private String url;
 	private String nickname;
-	private int sex;
-	private Date birthday;
 	
 	public Member() {
 		super();
@@ -64,19 +61,4 @@ public class Member{
 		return nickname;
 	}
 
-	public void setSex(int sex) {
-		this.sex = sex;
-	}
-	
-	public int getSex() {
-		return sex;
-	}
-	
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-	
-	public Date getBirthday() {
-		return birthday;
-	}
 }

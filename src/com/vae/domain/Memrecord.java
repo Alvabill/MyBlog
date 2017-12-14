@@ -1,11 +1,11 @@
 package com.vae.domain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Memrecord{
 	private int id;
 	private String ip;
-	private Date visit_time;
+	private Timestamp visit_time;
 	private int uid;
 	private int visit_uid;
 
@@ -29,11 +29,11 @@ public class Memrecord{
 		return ip;
 	}
 	
-	public void setVisit_time(Date visit_time) {
+	public void setVisit_time(Timestamp visit_time) {
 		this.visit_time = visit_time;
 	}
 	
-	public Date getVisit_time() {
+	public Timestamp getVisit_time() {
 		return visit_time;
 	}
 	
