@@ -21,7 +21,7 @@ public class ArticleDaoImpl implements ArticleDao{
 	public void add(Article article) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "insert into article(title,`reads`,cre_time,content,uid,cate_name,articleURL)values(?,?,?,?,?,?,?)";
+		String sql = "insert into article(title,`reads`,cre_time,content,uid,cate_name,articleURL,rank)values(?,?,?,?,?,?,?,?)";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -32,6 +32,7 @@ public class ArticleDaoImpl implements ArticleDao{
 			ps.setInt(5, article.getUid());
 			ps.setString(6, article.getCate_name());
 			ps.setString(7, article.getArticleURL());
+			ps.setInt(8, article.getRank());
 			ps.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -48,25 +49,13 @@ public class ArticleDaoImpl implements ArticleDao{
 	public void updateStr(Article article) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		int type = article.getType();
-		String sql = "";
-		switch(type) {
-		    case 0:
-		    	sql = "update article set title=? where artid=?";break;
-		    case 1:
-		    	sql = "update article set content=? where artid=?";break;
-		    case 2:
-		    	sql = "update article set cate_name=? where artid=?";break;
-		}
+		String sql = "update article set content=?,cate_name=? where title=?";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
-			switch(type) {
-			    case 0:ps.setString(1, article.getTitle());break;
-			    case 1:ps.setString(1, article.getContent());break;
-			    case 2:ps.setString(1, article.getCate_name());break;
-			}
-			ps.setInt(2, article.getArtid());
+			ps.setString(1, article.getContent());
+			ps.setString(2, article.getCate_name());
+			ps.setString(3, article.getTitle());
 			ps.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -75,16 +64,35 @@ public class ArticleDaoImpl implements ArticleDao{
 			DBUtils.close(null, ps, conn);
 		}		
 	}
+	@Override
+	public void updateRank(String title,int count) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "update article set rank=?,articleURL=? where title=?";
+		try{
+			conn = DBUtils.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, count);
+			ps.setString(2, "page?id="+count);
+			ps.setString(3, title);
+			ps.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+			throw new SQLException("更新数据失败");
+		}finally{
+			DBUtils.close(null, ps, conn);
+		}	
 	
+	}
 	public void updateReads(Article article) throws SQLException{
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "update article set `reads`=? where artid=?";
+		String sql = "update article set `reads`=? where rank=?";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, article.getReads());
-			ps.setInt(2, article.getArtid());
+			ps.setInt(2, article.getRank());
 			ps.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -98,14 +106,14 @@ public class ArticleDaoImpl implements ArticleDao{
 	 * 删除方法
 	 */
 	@Override
-	public void delete(int artid) throws SQLException {
+	public void delete(String title) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "delete from article where artid=?";
+		String sql = "delete from article where title=?";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1,artid);
+			ps.setString(1,title);
 			ps.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -124,7 +132,7 @@ public class ArticleDaoImpl implements ArticleDao{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Article atc = null;
-		String sql = "select title,`reads`,cre_time,cate_name,content,articleURL from article where artid=?";
+		String sql = "select title,`reads`,cre_time,cate_name,content,articleURL from article where rank=?";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -190,7 +198,7 @@ public class ArticleDaoImpl implements ArticleDao{
 		ResultSet rs = null;
 		Article atc = null;
 		List<Article> articles = new ArrayList<Article>();
-		String sql = "select title,`reads`,cre_time,cate_name,content,articleURL from article";
+		String sql = "select title,`reads`,cre_time,cate_name,content,articleURL,rank from article";
 		try{
 			conn = DBUtils.getConnection();
 			ps = conn.prepareStatement(sql);
@@ -203,6 +211,7 @@ public class ArticleDaoImpl implements ArticleDao{
 				atc.setCate_name(rs.getString(4));
 				atc.setContent(rs.getString(5));
 				atc.setArticleURL(rs.getString(6));
+				atc.setRank(rs.getInt(7));
 				articles.add(atc);
 			}
 		}catch(SQLException e){
@@ -213,5 +222,7 @@ public class ArticleDaoImpl implements ArticleDao{
 		}
 		return articles;
 	}
+
+
 		
 }

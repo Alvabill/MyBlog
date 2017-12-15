@@ -1,117 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <p>
-        Notification API 是 HTML5 新增的桌面通知 API，用于向用户显示通知信息。该通知是脱离浏览器的，即使用户没有停留在当前标签页，甚至最小化了浏览器，该通知信息也一样会置顶显示出来。</p><a id="more"></a>
-      <h2 id="用户权限"><a href="#用户权限" class="headerlink" title="用户权限"></a>用户权限</h2>
-      <p>想要向用户显示通知消息，需要获取用户权限，而相同的域名只需要获取一次权限。只有用户允许的权限下，Notification 才能起到作用，避免某些网站的广告滥用 Notification 或其它给用户造成影响。那么如何知道用户到底是允不允许的？</p>
-      <p>Notification.permission 该属性用于表明当前通知显示的授权状态，可能的值包括：</p>
-      <ul>
-        <li>default ：不知道用户的选择，默认。</li>
-        <li>granted ：用户允许。</li>
-        <li>denied ：用户拒绝。</li>
-      </ul>
-      <figure class="highlight js">
-        <table>
-          <tbody>
-            <tr>
-              <td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td>
-              <td class="code"><pre><div class="line"><span class="keyword">if</span>(Notification.permission === <span class="string">'granted'</span>){</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'用户允许通知'</span>);</div><div class="line">}<span class="keyword">else</span> <span class="keyword">if</span>(Notification.permission === <span class="string">'denied'</span>){</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'用户拒绝通知'</span>);</div><div class="line">}<span class="keyword">else</span>{</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'用户还没选择，去向用户申请权限吧'</span>);</div><div class="line">}</div></pre></td>
-            </tr>
-          </tbody>
-        </table>
-      </figure>
-      <h2 id="请求权限"><a href="#请求权限" class="headerlink" title="请求权限"></a>请求权限</h2>
-      <p>当用户还没选择的时候，我们需要向用户去请求权限。Notification 对象提供了 requestPermission() 方法请求用户当前来源的权限以显示通知。</p>
-      <p>以前基于回调的语法已经弃用（当然在现在的浏览器中还是能用的），最新的规范已将此方法更新为基于 promise 的语法：</p>
-      <figure class="highlight js">
-        <table>
-          <tbody>
-            <tr>
-              <td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td>
-              <td class="code"><pre><div class="line">Notification.requestPermission().then(<span class="function"><span class="keyword">function</span>(<span class="params">permission</span>) </span>{</div><div class="line">    <span class="keyword">if</span>(permission === <span class="string">'granted'</span>){</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'用户允许通知'</span>);</div><div class="line">    }<span class="keyword">else</span> <span class="keyword">if</span>(permission === <span class="string">'denied'</span>){</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'用户拒绝通知'</span>);</div><div class="line">    }</div><div class="line">});</div></pre></td>
-            </tr>
-          </tbody>
-        </table>
-      </figure>
-      <h2 id="推送通知"><a href="#推送通知" class="headerlink" title="推送通知"></a>推送通知</h2>
-      <p>获取用户授权之后，就可以推送通知了。</p>
-      <figure class="highlight js">
-        <table>
-          <tbody>
-            <tr>
-              <td class="gutter"><pre><div class="line">1</div></pre></td>
-              <td class="code"><pre><div class="line"><span class="keyword">var</span> notification = <span class="keyword">new</span> Notification(title, options)</div></pre></td>
-            </tr>
-          </tbody>
-        </table>
-      </figure>
-      <p>参数如下：</p>
-      <ul>
-        <li>title：通知的标题</li>
-        <li>options：通知的设置选项（可选）。
-          <ul>
-            <li>body：通知的内容。</li>
-            <li>tag：代表通知的一个识别标签，相同tag时只会打开同一个通知窗口。</li>
-            <li>icon：要在通知中显示的图标的URL。</li>
-            <li>image：要在通知中显示的图像的URL。</li>
-            <li>data：想要和通知关联的任务类型的数据。</li>
-            <li>requireInteraction：通知保持有效不自动关闭，默认为false。</li>
-          </ul>
-        </li>
-      </ul>
-      <p>还有一些其他的参数，因为用不了或者没什么用这里就没必要说了。</p>
-      <figure class="highlight js">
-        <table>
-          <tbody>
-            <tr>
-              <td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td>
-              <td class="code"><pre><div class="line"><span class="keyword">var</span> n = <span class="keyword">new</span> Notification(<span class="string">'状态更新提醒'</span>,{</div><div class="line">    <span class="attr">body</span>: <span class="string">'你的朋友圈有3条新状态，快去查看吧'</span>,</div><div class="line">    <span class="attr">tag</span>: <span class="string">'linxin'</span>,</div><div class="line">    <span class="attr">icon</span>: <span class="string">'http://blog.gdfengshuo.com/images/avatar.jpg'</span>,</div><div class="line">    <span class="attr">requireInteraction</span>: <span class="literal">true</span></div><div class="line">})</div></pre></td>
-            </tr>
-          </tbody>
-        </table>
-      </figure>
-      <p>通知消息的效果图如下：</p>
-      <p><img src="http://blog.gdfengshuo.com/images/post/notification.png" alt="image"></p>
-      <h2 id="关闭通知"><a href="#关闭通知" class="headerlink" title="关闭通知"></a>关闭通知</h2>
-      <p>从上面的参数可以看出，并没有一个参数用来配置显示时长的。我想要它 3s 后自动关闭的话，这时可以调用 close() 方法来关闭通知。</p>
-      <figure class="highlight js">
-        <table>
-          <tbody>
-            <tr>
-              <td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td>
-              <td class="code"><pre><div class="line"><span class="keyword">var</span> n = <span class="keyword">new</span> Notification(<span class="string">'状态更新提醒'</span>,{</div><div class="line">    <span class="attr">body</span>: <span class="string">'你的朋友圈有3条新状态，快去查看吧'</span></div><div class="line">})</div><div class="line"></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</div><div class="line">    n.close();</div><div class="line">}, <span class="number">3000</span>);</div></pre></td>
-            </tr>
-          </tbody>
-        </table>
-      </figure>
-      <h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2>
-      <p>Notification 接口的 onclick属性指定一个事件侦听器来接收 click 事件。当点击通知窗口时会触发相应事件，比如打开一个网址，引导用户回到自己的网站去。</p>
-      <figure class="highlight js">
-        <table>
-          <tbody>
-            <tr>
-              <td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td>
-              <td class="code"><pre><div class="line"><span class="keyword">var</span> n = <span class="keyword">new</span> Notification(<span class="string">'状态更新提醒'</span>,{</div><div class="line">    <span class="attr">body</span>: <span class="string">'你的朋友圈有3条新状态，快去查看吧'</span>,</div><div class="line">    <span class="attr">data</span>: {</div><div class="line">        <span class="attr">url</span>: <span class="string">'http://blog.gdfengshuo.com'</span></div><div class="line">    }</div><div class="line">})</div><div class="line">n.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</div><div class="line">    <span class="built_in">window</span>.open(n.data.url, <span class="string">'_blank'</span>);      <span class="comment">// 打开网址</span></div><div class="line">    n.close();                              <span class="comment">// 并且关闭通知</span></div><div class="line">}</div></pre></td>
-            </tr>
-          </tbody>
-        </table>
-      </figure>
-      <h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2>
-      <p>前面说那么多，其实就是为了用。那么到底哪些地方可以用到呢？</p>
-      <p>现在网站的消息提醒，大多数都是在消息中心显示个消息数量，然后发邮件告诉用户，这流程完全没有错。不过像我这种用户，觉得别人点个赞，收藏一下都要发个邮件提醒我，老是要去删邮件（强迫症），我是觉得挺烦的甚至关闭了邮件提醒。</p>
-      <p>当然这里并不是说要用 Notification，毕竟它和邮件的功能完全不一样。</p>
-      <p>我觉得比较适合的是新闻网站。用户浏览新闻时，可以推送给用户实时新闻。以腾讯体育为例，它就使用了 Notification API。在页面中引入了一个 notification2017_v0118.js，有兴趣可以看看别人是怎么成熟的使用的。</p>
-      <p>一进入页面，就获取授权，同时自己页面有个浮动框提示你允许授权。如果允许之后，就开始给你推送通知了。不过它在关闭标签卡的时候，通知也会被关闭，那是因为监听了页面 beforeunload 事件。</p>
-      <figure class="highlight js">
-        <table>
-          <tbody>
-            <tr>
-              <td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td>
-              <td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addOnBeforeUnload</span>(<span class="params">e</span>) </span>{</div><div class="line">	FERD_NavNotice.notification.close();</div><div class="line">}</div><div class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.attachEvent){</div><div class="line">	<span class="built_in">window</span>.attachEvent(<span class="string">'onbeforeunload'</span>, addOnBeforeUnload);</div><div class="line">} <span class="keyword">else</span> {</div><div class="line">	<span class="built_in">window</span>.addEventListener(<span class="string">'beforeunload'</span>, addOnBeforeUnload, <span class="literal">false</span>);</div><div class="line">}</div></pre></td>
-            </tr>
-          </tbody>
-        </table>
-      </figure>
-      <h2 id="兼容"><a href="#兼容" class="headerlink" title="兼容"></a>兼容</h2>
-      <p>说到兼容，自然是倒下一大片，而且各浏览器的表现也会有点差异。移动端的几乎全倒，PC端的还好大多都能支持，除了IE。所以使用前，需要先检查一下浏览器是否支持 Notification。</p>
-    
+ <p>Electron 是一个搭建跨平台桌面应用的框架，仅仅使用 JavaScript、HTML 以及 CSS，即可快速而容易地搭建一个原生应用。这对于想要涉及其他领域的开发者来说是一个非常大的福利。</p>
+                  <a id="more"></a>
+                  <p>对于手机党的音乐爱好者们来说，都会给手机选购一款与其搭配的便携式耳机在上下班路途中、外出旅途中、闲暇的逛街途中来尽情欣赏自己喜欢的音乐和歌曲，
+                  给手机选购的耳机无非一般有以下几点要求，首先是重量轻盈便于携带，其次是音质出众音色耐听，另外还得具有带麦克风/接听电话按键功能的线控器以便听歌的同时便于接听电话，
+                  心血来潮用K歌软件唱唱歌什么的，释放自己的天性。作为音频领域的老品牌飞利浦推出的SHE4205BK入耳式耳机正是集合了以上众多的特点，为手机量身打造，
+                  而目前在官方旗舰店原价199元减100元实际售价99元的打折活动也在如火如荼的进行，也凸显了这款产品的性价比，那么这款耳机的实际表现如何呢，
+                  笔者也使用最新的华为Mate 9手机以及国产千元机皇的凯音N3播放器进行了深度体验。</p>
+                    <p>
+                      <img src="https://making-photos.b0.upaiyun.com/review_photos/c07b0b455c056137df0517e513ff8596.JPG!review" alt="Image text">
+                    </p>
+                          <p>耳机的包装非常的轻薄，采用了透明橱窗的形势，透过包装盒外面就可以清楚看到内部的耳机，便于实体店用户选购，。包装盒背部带有防伪刮刮涂层，
+                          	像飞利浦这样的大品牌产品市面上的“李鬼”还是很多的，验明一下正身还是显得非常重要，笔者的建议还是去官方旗舰店购买比较让人放心。</p>
+
+					<p>
+                      <img src="https://making-photos.b0.upaiyun.com/review_photos/a4eae55cf3717d65a53bd6d4dd1bd984.JPG!review" alt="Image text">
+                    </p>
+                          <p>飞利浦 SHE4205BK耳机在结构上为入耳式开放设计，采用了钕制磁铁和CCAW音圈，PET隔音膜。扬声器直径12.2毫米，耳机的灵敏度为105分贝，
+                          	阻抗16欧姆，都是常见的普通手机都能轻松推动的参数。耳机的重量控制的非常轻盈，净重只有0.014千克，佩带时候完全感觉不到耳机的重量，具有极强的舒适感和便携性。</p>
+                    <p>
+                      <img src="https://making-photos.b0.upaiyun.com/review_photos/bf427caafb5d22829c9735617e5d9685.JPG!review" alt="Image text">
+                    </p>
+                          <p>耳机的外观工艺是钢琴漆的烤面，腔体的造型显得比较扁平，并且体积上也不大，所以实际佩带时候入耳的感觉很好，没有那种塞满耳洞撑爆的难受感觉，
+                          	相反轻盈的重量反而让人察觉不到耳机的存在，耳机虽然是入耳式结构，不过入耳部分并不算太深，这也是佩带舒适的另一个原因。</p>
+                    <p>
+                      <img src="https://making-photos.b0.upaiyun.com/review_photos/2e9c85562b616800155118e698e57257.JPG!review" alt="Image text">
+                    </p>
+                          <p>耳机采用了开放式的声学结构，倾角的设计无论是在佩带舒适感还是听感上都有独特之处，会让声音显得更为清晰和通透，</p>
+                    <p>
+                      <img src="https://making-photos.b0.upaiyun.com/review_photos/93d9027df1e9b3dd44e2d4456be366ee.JPG!review" alt="Image text">
+                    </p>
+                          <p>作为一款为手机定制设计的耳机，自然也带有线控设计，线控上一面麦克风，
+                          	方便平时接听电话和录音功能，K歌娱乐。线控另外一面则是一个操控按键，按键在苹果以及安卓手机上的操控设计都是通过单击或者连击来完成，非常有特点：</p>
+                          	<p>单击：播放/暂停音乐 接听/挂断电话
+								双击:播放下一曲
+								三连击：播放上一曲
+								单击&Hold：部分安卓支持语音控制 进入百度客户端 苹果手机则为SiRi语音控制</p>
+					<p>
+                      <img src="https://making-photos.b0.upaiyun.com/review_photos/223b61e6f68f26546a1862b74d94b96c.JPG!review" alt="Image text">
+                    </p>
+					<p>
+                      <img src="https://making-photos.b0.upaiyun.com/review_photos/44ad21c2a20a687aabf8ab7646290166.JPG!review" alt="Image text">
+                    </p>		
+                    <p>毕竟飞利浦也是专业的耳机音频老品牌，所以耳机上也有十分必要的束线器设计，橡胶材质，有很好的防滑效果，便于使用时候理线更加方便的使用耳机。</p>	
+                    
+                     <p>
+                      <img src="https://making-photos.b0.upaiyun.com/review_photos/f70bf94641ef54c848003e73077d90c5.JPG!review" alt="Image text">
+                    </p>    
+                    
+                    <p>耳机的插头是L型镀金插头，手柄部分是橡胶材质，带有防弯折设计，手柄上还有飞利浦的英文品牌logo，手感很好，镀金也可以很好的防止氧化。
+                    	耳机线橡胶弹性质感，柔韧性不错，官方宣称有防缠绕效果，从实用来看防缠绕跟面块耳机线相比还是有差距。</p>	
+                    
+                     <p>
+                      <img src="https://making-photos.b0.upaiyun.com/review_photos/2775580abe30ad3468d98d5c6b7d2eb5.JPG!review" alt="Image text">
+                    </p>    
+                    <p>16欧姆的阻抗手里的vivo Xshot和华为Mate 9手机都能轻松的推动，一般音量开到45~50左右的进度就有足够的音量了，使用网易云音乐在线听歌，耳机在音色上给我的感觉是中频比较凸显一些，
+                    	特别是听人声属于偏温暖的声音。不过耳机并不是完全中频上的暖意，像一些女声高音部分也会时不时的在温暖中显现，无形中给声音增加一些高频的明亮感觉，
+                    	耳机的低频属于下潜不深但弹性较快的风格，给人感觉上下的幅度比较轻盈。耳机在手机上三频的解析力很一般，给人留下印象更深刻的还是整体温暖音色，非常适合用来聆听流行歌曲，
+                    	高频部分也没有任何毛刺，属于比较讨好耳朵的声音，完全可以满足手机的听歌需求。</p>	
+                    
+                     <p>
+                      <img src="https://making-photos.b0.upaiyun.com/review_photos/dee4564102e779fe6e3dad83d8b1afe5.JPG!review" alt="Image text">
+                    </p>    
+                    <p>作为一名音频爱好者，自然天生就喜欢折腾，只用手机听听还是感觉不过瘾，好奇感让我为了进一步看看这幅耳机的完全实力，我又接上国产千元旗舰播放器凯音N3领略了一番听感。凯音N3是最近比较火的一款新上市的产品，跟凯音i5的高端定位不同，主要用来弥补千元级这个价位市场，所以也诚意满满，N3也是首款千元级产品支持DOP 功能的播放器。在硬件配置上采用 X1000+AK4490EN+OPA1652+OPA1622 的协处理运放组合，CPU主控是君正X1000，解码芯片为AK4490EN，运放芯片则是OPA1652+OPA1622。
+                    	自然的相比接驳在手机上使用在N3这样的专业音频播放器上的表现好了许多，非常明显的是三频层次感清晰了很多，高频更为出色，整体更为通透细腻。下面就选取一些自己熟悉的歌曲简单说说听感：</p>	
+                    
+                     <p>
+                      <img src="https://making-photos.b0.upaiyun.com/review_photos/2067993da64521a88f7ed7782e1cc25f.JPG!review" alt="Image text">
+                    </p>     
+                    <p>在凯音N3上女声显得更为娇柔甜美，相比手机上高频的分离度完全出来了，如果在手机上音色更倾向于温暖中频，则在N3上听女声更加倾向于高频。像听蔡淳佳的专辑完全能够表现出其邻家女孩那般醇美的音色，虽然没有凌厉高频那般震撼，却有一种让人能够静下心聆听如阳光板迷人的气质。再来一首我喜欢的高音女王戴爱玲的专辑《2005为爱做事情》，戴爱玲的歌曲比较考验播放设备，如果设备不够好听高音歌曲以及其中的快歌很容易有高音太硬刺耳层次感嘈杂的难受感觉。飞利浦 SHE4205BK与凯音N3的搭配倒是比较协调，
+                    	少了一些凌厉硬朗感，整体是一种甜美中高亢的音色，比较宽松，像专辑第二首歌曲《2的N次方》从头到尾层次感保持得很好，跟手机上的表现天壤之别。</p>	
+                    	<p>再来听听男人的歌，迪克牛仔的《三万英尺》，这是一首从学生时代就开始听的经典老歌，对我来说歌声中潜藏者自己的青春时代。迪克牛仔唱歌的风格就是很man很男人，乍一听不太讲理，
+                    	不过仔细听每个歌词处理都很细腻，似乎在听一个男人诉说自己的心事。耳机虽然只是一个入耳式小耳塞，不过在凯音一贯强大的推理下声音变得力量十足，那种男人的沧桑感和无奈感沁入人心，很容易引起共鸣。</p>	
+                    	<p>谭晶这次在《我是歌手》上非常惊艳，也彻底改变我对他以往演唱风格的印象，特别是其中改编的齐豫的《欲水》，包含了歌剧、美声花腔、摇滚、探戈、交响乐等多种元素，基本上让这首歌曲彻底改头换面。耳机在N3上对于谭晶人声部分的表现还是甜美的感觉，对于这首歌几部分不同风格的转变衔接比较自然，从歌曲开头的轻盈慢唱到第二段的美声高音的对于内心的挣扎，
+                    	到了最后一段副歌部分歇斯底里的高音，非常高亢有力，带着一丝丝的弹性，是一种略微收敛的高音，刺入人心，一个悲哀的故事的结束，很有震撼力。</p>	
+                           	<p>飞利浦 SHE4205BK入耳式耳机针对手机量身打造在外设设计以及佩戴上还是令人满意的，扁平带有倾角的入耳式造型以及轻盈的重量令佩戴感非常舒适，合适的体积让佩带时候耳洞没有撑耳难受的感觉。耳机的16欧姆低阻抗对于一般手机来说非常容易驱动，线控的不同连击操控方式很有特色。耳机在手机上的音色偏向于温和的中频风格，非常适合用聆听流行歌曲，而在N3这样的千元级播放器上则还有更大的提升潜力，整体声音表现提高了很大一截，
+                           	层次感、声场、分离度、通透感都提高不少。目前旗舰店199元减100元的打折活动还是比较实惠的，对于喜欢手机听歌，便携听歌的朋友来说不失为一个选择。</p>            

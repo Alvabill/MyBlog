@@ -11,10 +11,11 @@ public interface ArticleDao {
 	
 	//更新方法
 	public void updateStr(Article article)throws SQLException;
+	public void updateRank(String title,int count) throws SQLException;
 	public void updateReads(Article article)throws SQLException;
 	
 	//删除方法
-	public void delete(int artid)throws SQLException;
+	public void delete(String title)throws SQLException;
 	
 	//查找方法
 	public Article findById(int artid)throws SQLException;

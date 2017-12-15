@@ -13,20 +13,21 @@
   List<Article> atcList = atcDao.findAll();
   if(!atcList.isEmpty()){
     Collections.reverse(atcList);
-	  for(Article article:atcList){
+    Article article = new Article();
+	  for(int i=0;i<2;i++){
+		  article = atcList.get(i);
 		  item.append(
-						  String.format("<div class='index-post'><header class='post-header'><h2 class='post-title'>%s</h2><div class='post-meta'><span class='post-time'><i class='fa fa-calendar-o'></i>%s</span><span class='post-category'><i class='fa fa-folder-o'></i>%s</span> <span class='post-reads'><i class='fa fa-eye'></i>%d</span></div></header> <div class='post-body'><p class='body-content'>%s</p><div class='post-button'><a class='btn' href='%s'>阅读全文 >></a></div> </div></div>",
-						  article.getTitle(),
-						  article.getCre_time().toString(),
-						  article.getCate_name(),
-						  article.getReads(),
-						  article.getContent(),
-						  article.getArticleURL()
+				  String.format("<div class='index-post'><header class='post-header'><a href='%s'><h2 class='post-title'>%s</h2></a><div class='post-meta'><span class='post-time'><i class='fa fa-calendar-o'></i>%s</span><span class='post-category'><i class='fa fa-folder-o'></i>%s</span> <span class='post-reads'><i class='fa fa-eye'></i>%d</span></div></header> <div class='post-body'><p class='body-content'>%s</p> </div></div>",
+	              article.getArticleURL(),
+	              article.getTitle(),
+				  article.getCre_time().toString(),
+				  article.getCate_name(),
+				  article.getReads(),
+				  article.getContent()
 					  )
 				  );
 	  }
   }
-
 %>
 <%
     String Role_code = "2";
@@ -75,14 +76,26 @@
         <ul>
           <li><a href="/myBlog"><i class="fa fa-home fa-fw"></i>&nbsp; 主页</a></li>
           <li><a href="#"><i class="fa fa-th fa-fw"></i>&nbsp; 分类</a></li>
-          <li><a href="#"><i class="fa fa-user fa-fw"></i>&nbsp; 关于</a></li>
-        </ul>
+       	 <li><a href="#"><i class="fa fa-user fa-fw"></i>&nbsp; 关于</a></li>
+        	</ul>
       </div>
     </nav>
   </header>
 
   <%-- section --%>
   <section class="wrapper">
+    <div class="new-blog-header">
+      <span>Latest news</span>
+      <i class="icon-tiny fa fa-long-arrow-right right"></i>
+      <a class="right" href="#">View all news </a>
+    </div>
+
+    <div class="blog-banner left">
+      <img src="asset/img/banner1.jpg" alt="">
+    </div>
+    <div class="blog-banner right">
+      <img src="asset/img/banner2.jpg" alt="">
+    </div>
     <%=item %>
     <%-- <div class="index-post">
       <header class="post-header">
@@ -94,17 +107,13 @@
         </div>
       </header>
       <div class="post-body">
-        <p class="body-content">
-
-        </p>
-        <div class="post-button">
-          <a class="btn" href="#">阅读全文 >></a>
-        </div>
+        <p class="body-content"></p>
       </div>
     </div> --%>
+
     <%-- root --%>
     <div id="rootUI" class="User">
-      <a href="/myBlog"><i class="fa fa-wrench fa-fw"></i></a>
+      <a href="/myBlog/page/root"><i class="fa fa-wrench fa-fw"></i></a>
     </div>
   </section>
 

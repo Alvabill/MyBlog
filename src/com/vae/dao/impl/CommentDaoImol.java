@@ -110,4 +110,33 @@ public class CommentDaoImol implements CommentDao{
 		}
 		return comments;	
 	}
+
+	@Override
+	public List<Comment> findAll() throws SQLException {
+			Connection conn = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			Comment cm = null;
+			List<Comment> comments = new ArrayList<Comment>(); 
+			String sql = "select commentdate,comment_content,uid,art_id from comment";
+			try{
+				conn = DBUtils.getConnection();
+				ps = conn.prepareStatement(sql);
+				rs = ps.executeQuery();
+				while(rs.next()){
+					cm = new Comment();
+					cm.setCommentdate(rs.getTimestamp(1));
+					cm.setComment_content(rs.getString(2));
+					cm.setUid(rs.getInt(3));
+					cm.setArt_id(rs.getInt(4));
+					comments.add(cm);
+				}
+			}catch(SQLException e){
+				e.printStackTrace();
+				throw new SQLException("查询所有数据失败");
+			}finally{
+				DBUtils.close(rs, ps, conn);
+			}
+			return comments;
+	}
 }

@@ -18,5 +18,6 @@ public interface CommentDao {
 	public Comment findById(int id)throws SQLException;
 	
 	public List<Comment> findByArtId(int art_id)throws SQLException;
+	public List<Comment> findAll()throws SQLException;
 	
 }

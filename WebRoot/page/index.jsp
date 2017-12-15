@@ -124,7 +124,7 @@ function BtnAjax(){
               Display();
 
           } else { //页面不正常
-              window.alert("请先登录~");
+              window.alert("请先登录!");
           }
       }
   }
@@ -205,6 +205,30 @@ function BtnAjax(){
       case 2:%>
           <jsp:include page="blog/2.jsp" />
     <%    break;
+      case 3:%>
+          <jsp:include page="blog/3.jsp" />
+    <%    break;
+      case 4:%>
+      <jsp:include page="blog/4.jsp" />
+<%    break;
+      case 5:%>
+      <jsp:include page="blog/5.jsp" />
+<%    break;
+      case 6:%>
+      <jsp:include page="blog/6.jsp" />
+<%    break;
+      case 7:%>
+      <jsp:include page="blog/7.jsp" />
+<%    break;
+      case 8:%>
+      <jsp:include page="blog/8.jsp" />
+<%    break;
+      case 9:%>
+      <jsp:include page="blog/9.jsp" />
+<%    break;
+      case 10:%>
+      <jsp:include page="blog/10.jsp" />
+<%    break;
       }
     %>
      </div>
@@ -223,11 +247,11 @@ function BtnAjax(){
 
     <div class="comment-textarea">
      <input id="comment-content" type="text" name="" placeholder="我来说两句..." onkeypress="EnterPress(event)">
-     <input type="button" name="btn" value="提交" onclick="BtnAjax()">
     </div>
+    <input id = "comment-button" type="button" name="btn" value="提交" onclick="BtnAjax()">
   </div>
   <div class="comment-data">
-      <p class="comment-data-news">最新</p>
+      <p class="comment-data-news">最新评论</p>
       <%-- <div id="comment-items"></div> --%>
       <%=comment_item %>
       <%-- <div class="comment-data-item">

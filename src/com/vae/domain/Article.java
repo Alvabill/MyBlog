@@ -11,6 +11,7 @@ public class Article{
 	private int uid;  //用户id
 	private String cate_name;  //分类名称
 	private String articleURL; //文章链接
+	private int rank; //文章序号
 	
 	private int type;
 	
@@ -29,23 +30,12 @@ public class Article{
 		this.articleURL = articleURL;
 	}
 	
-	public Article(int type, String str, int artid) {
-		super();
-		this.type = type;
-		switch(type) {
-			case 0:this.title = str;break;
-			case 1:this.content = str;break;
-			case 2:this.cate_name = str;break;
-		}
-		this.artid = artid;
-	}
 	
-	public Article(int reads, int artid) {
+	public Article(int reads, int rank) {
 		super();
 		this.reads = reads;
-		this.artid = artid;
+		this.rank = rank;
 	}
-	
 	
 	public void setArtid(int artid) {
 		this.artid = artid;
@@ -87,6 +77,13 @@ public class Article{
 		return content;
 	}
 	
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+	
+	public int getRank() {
+		return rank;
+	}
 	public void setUid(int uid) {
 		this.uid = uid;
 	}
@@ -94,7 +91,6 @@ public class Article{
 	public int getUid() {
 		return uid;
 	}
-
 	public void setCate_name(String cate_name) {
 		this.cate_name = cate_name;
 	}

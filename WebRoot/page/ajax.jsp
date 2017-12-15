@@ -9,14 +9,14 @@
     	request.setCharacterEncoding("utf-8");
         
     	String str = request.getParameter("artID");
-    	int art_id = Integer.parseInt(str);
+    	int art_rank = Integer.parseInt(str);
     	str = request.getParameter("uid");
         int uid = Integer.parseInt(str);
     	String comment_content = request.getParameter("content");
     	
     	CommentDao commentDao = DaoFactory.getCommentDaoInstance();
     	Comment comment = new Comment();
-    	comment.setArt_id(art_id);
+    	comment.setArt_id(art_rank);
     	comment.setComment_content(comment_content);
     	java.util.Date ud = new java.util.Date();
     	java.sql.Date commentdate = new java.sql.Date(ud.getTime());

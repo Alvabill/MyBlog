@@ -3,6 +3,14 @@
   font-family: "SF Pro SC", "HanHei SC", "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
 }
 
+body {
+  background:rgb(27, 27, 25) url(../img/main_background.jpg) 50px 50px no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+section {
+  padding: 80px 0;
+}
 li {
   list-style-type: none;
 }
@@ -10,10 +18,20 @@ li {
 a:link, a:visited, a:hover, a:active {
   text-decoration: none;
 }
-
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
 /*header start*/
 #header {
-  background: rgb(44, 62, 80);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
 }
 
 #nav {
@@ -46,6 +64,7 @@ a:link, a:visited, a:hover, a:active {
 .navbar {
   float: right;
   text-align: center;
+   color: rgb(220,117,14);
 }
 .navbar ul {
   margin: 0;
@@ -58,48 +77,80 @@ a:link, a:visited, a:hover, a:active {
   vertical-align: middle;
 }
 /*header end*/
-
 /*section start*/
 /*主页*/
+.new-blog-header {
+  border-top: 1px solid white;
+  padding-top: 2rem;
+}
+.new-blog-header span {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 400;
+  display: inline-block;
+  margin-left: 10px;
+}
+.new-blog-header i {
+  display: inline-block;
+  float: right;
+  color: white;
+  line-height: 1.3rem;
+}
+.new-blog-header a {
+  border-bottom:1px solid white;
+  padding-bottom:2px;
+  color: white;
+  display: inline-block;
+  margin-right: 5px;
+}
+.new-blog-header a:hover {
+  border: none;
+}
+
+.blog-banner {
+  width: 48%;
+  margin: 2rem 0px;
+}
+.blog-banner img{
+  display: inline-block;
+  width: 100%;
+  opacity: 0.8;
+}
+
+/*index-post*/
 .index-post {
   margin: 1rem 5px;
+  width: 48%;
+  float: left;
+  text-align: center;
 }
 .post-title {
-  font-size: 3rem;
-  color: rgb(85, 85, 85);
+  font-size: 1.5rem;
+  color: rgb(227, 227, 227);
 }
 
 .post-meta span {
+  font-size: 0.9rem;
   display: inline-block;
   padding-right: 1rem;
   margin-right: 5px;
   border-right: 1px rgb(153, 153, 153) solid;
-  color: rgb(153, 153, 153);
+  color: rgb(227, 227, 227);
 }
 .post-meta span i {
   margin-right: 5px;
 }
 .body-content {
-  font-size: 2rem;
   color: rgb(85, 85, 85);
 }
 
-.post-button {
-  background: rgb(44, 62, 80);
-  padding: 1.2rem 1.2rem;
-  width: 5.5rem;
-}
-
-.post-button a {
-  color: white;
-}
 
 /*blog页面*/
 .blog-title {
   margin-top: 5rem;
   text-align: center;
   font-size: 2rem;
-  color: rgb(85, 85, 85);
+  color: rgb(220,117,14);
 }
 .blog-meta {
   text-align: center;
@@ -108,8 +159,8 @@ a:link, a:visited, a:hover, a:active {
   display: inline-block;
   padding-right: 1rem;
   margin-right: 5px;
-  border-right: 1px rgb(153, 153, 153) solid;
-  color: rgb(153, 153, 153);
+  border-right: 1px rgb(160, 160, 160) solid;
+  color: rgb(160, 160, 160);
 }
 .blog-meta span i {
   margin-right: 5px;
@@ -118,7 +169,7 @@ a:link, a:visited, a:hover, a:active {
   max-width: 800px;
   margin: 5rem auto;
   text-indent: 2rem;
-  color: rgb(85, 85, 85);
+  color: rgb(160, 160, 160);
 }
 
 /*comments*/
@@ -126,52 +177,83 @@ a:link, a:visited, a:hover, a:active {
   overflow: auto;
   max-width: 800px;
   margin: 5rem auto;
-  color: rgb(85, 85, 85);
-  background: rgb(245, 245, 245);
+  color: rgb(227,227,227);
   border-radius: 5px;
 }
 .comment-number {
   font-size: 1.5rem;
   font-weight: bold;
   float: left;
+  color:rgb(227,227,227);
   margin: 0.5rem 3rem;
 }
 .comment-login {
-  font-size: 1.5rem;
-  font-weight: bolder;
-  float: right;
-  margin: 0.5rem 3rem;
+  position:relative;
+	float:right;
+	right:50px;
+	width:60px;
+	height:20px;
+	color:white;
+	vertical-align:center;
+	background-color:black;
+	border-radius: 5px;
+	text-align: center;
+	border: 1px solid;
+	padding-top:7px;
+}
+.comment-login:hover, .comment-login:focus {
+  -webkit-box-shadow: 0 0 0 2px white, 0 0 0 2px  rgb(220,117,14);
+  box-shadow: 0 0 0 2px white, 0 0 0 2px  rgb(220,117,14);
+  -webkit-transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
+  -webkit-animation: gelatine 0.5s 1;
+  animation: gelatine 0.5s 1;
 }
 .comment-textarea {
   clear: both;
   margin: 2rem;
   text-align: center;
+
 }
 .comment-textarea input {
   width: 700px;
-  color: gray;
+  height:100px;
+  color: black;
   font-size: 1.5rem;
   padding: 0.5rem;
   margin-top: 1rem;
   border-radius: 5px;
-  border: 1px rgb(67, 152, 237) solid;
+  border: 3px rgb(218, 211, 239) solid;
 }
+#comment-button{
+	position:relative;
+	float:right;
+	right:50px;
+	width:60px;
+	height:30px;
+	color:white;
+	padding-right:50px;
+	background-color:black;
+	border-radius: 5px;
+	text-align: center;
 
+}
 .comment-data {
   margin:0 auto;
   max-width: 800px;
 }
 .comment-data-news {
-  border-left: 5px solid rgb(67, 152, 237);
-  color: black;
-  font-weight: 800;
-  font-size: 2rem;
+  border-left: 5px solid rgb(220,117,14);
+  color:rgb(227,227,227);
+  font-weight: 500;
+  font-size: 1.5rem;
   padding-left: 3px;
 }
 
 .comment-data-item {
   position: relative;
   height: 120px;
+  color:rgb(168,168,168);
   border-bottom: dashed 1px gray;
   margin-bottom: 1rem;
 }
@@ -186,7 +268,7 @@ a:link, a:visited, a:hover, a:active {
   position: absolute;
   left: 5rem;
   top: 0;
-  color: rgb(67, 152, 237);
+  color: rgb(220,117,14);
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -194,7 +276,7 @@ a:link, a:visited, a:hover, a:active {
   position: absolute;
   top: 0;
   right: 2rem;
-  color: rgb(213, 213, 214);
+  color: rgb(198,188,231);
   font-size: 1.2rem;
 }
 .comment-data-item-content {
@@ -207,14 +289,19 @@ a:link, a:visited, a:hover, a:active {
 
 /*footer start*/
 #footer {
-  background: rgb(44, 62, 80);
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
 }
 #footer p {
   color: white;
   text-align: center;
   font-size: 0.8rem;
   margin: 0;
-  padding: 2rem 0;
+  padding: 0 0 5px 0;
 }
 #footer a {
   color: white;
@@ -234,8 +321,8 @@ a:link, a:visited, a:hover, a:active {
   border-radius: 3rem;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  -webkit-box-shadow: 0 0 0 -2px white, 0 0 0 -1px #fe4365;
-  box-shadow: 0 0 0 -2px white, 0 0 0 -1px #fe4365;
+  -webkit-box-shadow: 0 0 0 -2px rgb(27, 27, 25), 0 0 0 -1px #fe4365;
+  box-shadow: 0 0 0 -2px rgb(27, 27, 25), 0 0 0 -1px #fe4365;
   border: none;
   -webkit-transition: -webkit-box-shadow .3s;
   transition: box-shadow .3s;
@@ -245,8 +332,8 @@ a:link, a:visited, a:hover, a:active {
   color: white;
 }
 .Root:hover, .Root:focus {
-  -webkit-box-shadow: 0 0 0 2px white, 0 0 0 4px #ff0364;
-  box-shadow: 0 0 0 2px white, 0 0 0 4px #ff0364;
+  -webkit-box-shadow: 0 0 0 2px rgb(27, 27, 25), 0 0 0 4px #ff0364;
+  box-shadow: 0 0 0 2px rgb(27, 27, 25), 0 0 0 4px #ff0364;
   -webkit-transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
   transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
   -webkit-animation: gelatine 0.5s 1;
