@@ -24,7 +24,7 @@
   		<div class="app-block">
   		  <div class="cube">
   			  <a href="#">
-  			    <img src="asset/img/default.png" class="img-responsive" alt="">
+  			    <img src="asset/img/upload.png" class="img-responsive" alt="">
           </a>
           </div>
   			<form action="logStatus.jsp" method="post" enctype="multipart/form-data">

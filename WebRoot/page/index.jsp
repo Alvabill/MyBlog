@@ -156,6 +156,7 @@ function BtnAjax(){
 
   sendRequest();
   document.getElementById("comment-content").value = "";
+  location.reload();
 }
 
   </script>
@@ -176,11 +177,11 @@ function BtnAjax(){
                 <i class="fa fa-home fa-fw"></i>&nbsp; 主页</a>
             </li>
             <li>
-              <a href="#">
+              <a href="../blogs.jsp">
                 <i class="fa fa-th fa-fw"></i>&nbsp; 分类</a>
             </li>
             <li>
-              <a href="#">
+              <a href="../about.jsp">
                 <i class="fa fa-user fa-fw"></i>&nbsp; 关于</a>
             </li>
           </ul>
@@ -209,26 +210,26 @@ function BtnAjax(){
           <jsp:include page="blog/3.jsp" />
     <%    break;
       case 4:%>
-      <jsp:include page="blog/4.jsp" />
-<%    break;
+	      <jsp:include page="blog/4.jsp" />
+	<%    break;
       case 5:%>
-      <jsp:include page="blog/5.jsp" />
-<%    break;
+	      <jsp:include page="blog/5.jsp" />
+	<%    break;
       case 6:%>
-      <jsp:include page="blog/6.jsp" />
-<%    break;
+	      <jsp:include page="blog/6.jsp" />
+	<%    break;
       case 7:%>
-      <jsp:include page="blog/7.jsp" />
-<%    break;
+	      <jsp:include page="blog/7.jsp" />
+	<%    break;
       case 8:%>
-      <jsp:include page="blog/8.jsp" />
-<%    break;
+	      <jsp:include page="blog/8.jsp" />
+	<%    break;
       case 9:%>
-      <jsp:include page="blog/9.jsp" />
-<%    break;
+	      <jsp:include page="blog/9.jsp" />
+	<%    break;
       case 10:%>
-      <jsp:include page="blog/10.jsp" />
-<%    break;
+	      <jsp:include page="blog/10.jsp" />
+	<%    break;
       }
     %>
      </div>

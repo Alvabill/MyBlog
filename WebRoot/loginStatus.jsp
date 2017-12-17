@@ -44,7 +44,7 @@
 	}
 	if(hasSignin){
 		for(Member member:mbList){
-	 		if(member.getPassword().equals(password)){
+	 		if(member.getPassword().equals(password)&&member.getAccount().equals(email)){
 	 			isSignin = true;
 	 			msg = "登录成功！";
 
@@ -75,11 +75,11 @@
 
 	<script>
     <%if(hasSignin&&isSignin){%>
-	    setTimeout('window.location.replace("/myBlog")',1500);
+	    setTimeout('window.location.replace="/myBlog"',1500);
     <%} else if(hasSignin&&(!isSignin)){%>
     	setTimeout("history.go(-1)",1500);
     <%} else {%>
-    	setTimeout("window.location.href('logup.jsp')",1500);
+    	setTimeout("window.location.href='logup.jsp'",1500);
     <%}%>
     </script>
 </body>

@@ -114,7 +114,7 @@
     <%if(hasSignup){%>
 	    setTimeout("self.location=document.referrer",1500);
     <%} else {%>
-    	setTimeout("window.location.href('login.jsp')",1500);
+    	setTimeout("window.location.href='login.jsp'",1500);
     <%}%>
     </script>
 </body>

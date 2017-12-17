@@ -53,6 +53,7 @@ form {
 }
 /*-----*/
 .cube img {
+  width: 30%;
   margin: 2em 0;
 }
 .app-block input[type="text"],.app-block input[type="password"]{
@@ -299,8 +300,8 @@ form {
 }
 
 #upload {
-	width: 150px;
-	height: 150px;
+	width: 250px;
+	height: 200px;
 	display: inline-block;
 	outline: none;
 	position: absolute;

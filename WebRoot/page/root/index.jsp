@@ -167,9 +167,9 @@ for(Article article:atcList){
 		}
 		
 		String deleteCom = request.getParameter("deleteCom");
-		int id = Integer.parseInt(deleteCom);
 		if(deleteCom!=null){
-			cmDao.delete(id);
+			int comid = Integer.parseInt(deleteCom);
+			cmDao.delete(comid);
 		}
 	}
 	
