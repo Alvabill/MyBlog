@@ -75,7 +75,24 @@ public class MemberDaoImpl implements MemberDao{
 			DBUtils.close(null, ps, conn);
 		}	
 	}
-
+	@Override
+	public void deleteUser(String userName) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "delete from member where nickname=?";
+		try{
+			conn = DBUtils.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,userName);
+			ps.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+			throw new SQLException(" 删除数据失败");
+		}finally{
+			DBUtils.close(null, ps, conn);
+		}	
+	}
+	
 	@Override
 	public Member findById(int uid) throws SQLException {
 		Connection conn = null;
@@ -135,5 +152,7 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		return members;
 	}
+
+
 
 }

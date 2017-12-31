@@ -48,6 +48,7 @@ if( cookies != null ){
 	StringBuffer blogList = new StringBuffer("");
 	StringBuffer commentList = new StringBuffer("");
 	StringBuffer memrecordList = new StringBuffer("");
+	StringBuffer memberList = new StringBuffer("");
 %>
 
 <%
@@ -111,6 +112,27 @@ for(Article article:atcList){
 					);
 		}
 	}
+	if(!mbList.isEmpty()){
+		int countMb = 0;
+		for(Member member:mbList){
+			countMb++;
+			String isRoot = "",isDisabled="";
+			if(member.getRole_code().equals("1")){
+				isRoot = "checked";
+				isDisabled = "disabled";
+			}
+			memberList.append(
+					String.format("<div class='show-visit-item' style='color:rgb(153, 153, 153)'><span>%d</span><span>%s</span><span><input type='checkbox' id='checkBox' %s onclick='changeRoot(%s)'><a %s href='index.jsp?deleteUser=%s'><i class='fa fa-remove'></i></a></span></div>",
+							countMb,
+							member.getNickname(),
+							isRoot,
+							member.getNickname(),
+							isDisabled,
+							member.getNickname()
+							)
+					);
+		}
+	}
 %>
 <%request.setCharacterEncoding("utf-8");
 	if(request.getMethod().equalsIgnoreCase("post")){
@@ -140,7 +162,7 @@ for(Article article:atcList){
 			atc.setArtid(id);
 			atc.setRank(id);
 			atcDao.add(atc);
-			
+
 			//rank
 			int count = 0;
 			Collections.reverse(atcList);
@@ -150,7 +172,7 @@ for(Article article:atcList){
 			}
 			//rank end
 		}
-		
+
 	}
 	if(request.getMethod().equalsIgnoreCase("get")){
 		String deleteAtc = request.getParameter("deleteAtc");
@@ -165,15 +187,20 @@ for(Article article:atcList){
 			}
 			//rank end
 		}
-		
+
 		String deleteCom = request.getParameter("deleteCom");
 		if(deleteCom!=null){
 			int comid = Integer.parseInt(deleteCom);
 			cmDao.delete(comid);
 		}
+		
+		String deleteUser = request.getParameter("deleteUser");
+		if(deleteUser!=null){
+			mbDao.deleteUser(deleteUser);
+		}
 	}
-	
-	
+
+
 %>
 <!DOCTYPE html>
 <html>
@@ -184,6 +211,23 @@ for(Article article:atcList){
 <link rel="stylesheet" href="../../asset/css/font-awesome.min.css">
 <link rel="stylesheet" href="../../asset/css/manager_page.css">
 <script>
+function changeRoot(user){
+	<% 
+	if(!mbList.isEmpty()){
+		for(Member member:mbList){
+			String n = member.getNickname();
+	%>
+		var name = '<%=n %>';
+		if(name == user){
+			<%
+			member.setRole_code("1");
+			%>
+		}		
+	<%
+		}
+	}
+	%>
+}
 </script>
 </head>
 <body>
@@ -288,7 +332,7 @@ for(Article article:atcList){
         <a href="#" class="myBtn"><i class="fa fa-remove"></i></a>
       </div> --%>
     </div>
-
+    
     <div class="show-visit">
       <div class="show-blog-header">
         <span>Visit</span>
@@ -297,6 +341,16 @@ for(Article article:atcList){
         <span>#</span><span>User</span><span>Time</span>
       </div>
       <%=memrecordList %>
+    </div>
+
+    <div class="show-user">
+      <div class="show-blog-header">
+        <span>User</span>
+      </div>
+      <div class="show-visit-item">
+          <span>#</span><span>User</span><span>Root</span>
+      </div>
+      <%=memberList %>
     </div>
   </section>
   <div class="clear"></div>

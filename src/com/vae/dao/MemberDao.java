@@ -14,6 +14,7 @@ public interface MemberDao {
 	
 	//删除方法
 	public void delete(int uid)throws SQLException;
+	public void deleteUser(String userName)throws SQLException;
 	
 	//查找方法
 	public Member findById(int uid)throws SQLException;

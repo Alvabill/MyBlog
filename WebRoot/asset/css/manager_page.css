@@ -138,13 +138,14 @@ body {
 }
 
 /*edit blog*/
-.edit-blog, .show-visit {
+.edit-blog, .show-visit, .show-user {
   float: left;
   width: 32%;
   height: 250px;
   border-radius: 4px;
   background: white;
   margin: 1rem 1rem;
+  overflow-y: scroll;
 }
 .edit-blog-form-div {
   width: 80%;

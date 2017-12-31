@@ -15,12 +15,21 @@ String content2 = null;
 String url2 = null;
 String imgUrl1 = null;
 String imgUrl2 = null;
+
 ArticleDao atcDao = DaoFactory.getArticleDaoInstance();
 List<Article> atcList = atcDao.findAll();
 int atcnum = 0;
 if(!atcList.isEmpty()){
 	for(Article atc:atcList){
 		atcnum++;
+	}
+}
+String titleArray[] = new String[atcnum]; 
+if(!atcList.isEmpty()){
+	int i = 0;
+	for(Article atc:atcList){
+		titleArray[i] = atc.getTitle();
+		i++;
 	}
 }
 Article article1 = new Article();
@@ -88,7 +97,53 @@ url2 = article2.getArticleURL();
     <meta content="text/html;charset=utf-8">
     <title>myBlog -- 所有博客</title>
    <link rel="stylesheet" href="asset/css/font-awesome.min.css">
-  <script src="asset/js/main.js"></script>
+   <link rel="stylesheet" href="asset/css/bootstrap.min.css">
+   <link rel="stylesheet" href="asset/css/autocomplete.css">
+  <script src="asset/js/jquery.min.js"></script>
+  <script src="asset/js/autocomplete.js"></script>
+  <script>
+  $(function(){
+
+	  //search buttton
+	  $('#searchBtn').click(function() {
+	    $('.search').css('visibility', 'visible');
+	    $('.search').css({
+	      'border': 'none',
+	      'box-shadow': 'none'
+	    });
+	  });
+
+	  var proposals = new Array(); 
+	  <%   for(int i=0;i <atcnum;i++){   %>  
+	          proposals[ <%=i%> ]= " <%=titleArray[i]%> ";  
+	  <%   }   %> 
+	  var searchHtml = function(keyword) {
+		  var newHtml = 0;
+		<%   for(int i=0;i <atcnum;i++){   %>  
+	          if(keyword == " <%=titleArray[i]%> ") {
+	        	  newHtml = '<%=i %>';
+	        	  newHtml+=1;
+	          } 
+	    <%   }   %> 
+	    if (newHtml === 0){
+	    	alert("查找文章不存在！");
+	    }else
+	    location.href = "page/index.jsp?id=" + newHtml;
+	  };
+	  $('#search-form').autocomplete({
+	    hints: proposals,
+	    width: 300,
+	    height: 30,
+	    onSubmit: function(text) {
+	      searchHtml(text);
+	    }
+	  });
+
+	})
+
+  
+  </script>
+  
     <style>
         * {margin:0;padding:0;  font-size: 14px;
   font-family: "SF Pro SC", "HanHei SC", "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
@@ -265,6 +320,10 @@ a {
   color: white;
   font-size: 0.8rem;
 }
+
+.search {
+	float:right;
+}
 /*footer end*/
     </style>
 </head>
@@ -272,15 +331,24 @@ a {
 
     <div id="header_outer">
         <div id="header" class="wrapper">
-                <div class="navbar">
-                        <ul>
-                          <li><a href="/myBlog"><i class="fa fa-home fa-fw"></i>主页</a>
-                          <li><a href="#">&nbsp;</a>
-                         </ul>
-                         </div>
+                		
+					<ul class="nav navbar-nav">
+						<li class="nav-item">
+							<a class="" href="index.jsp" id=""><span class="fa fa-home">首页</span></a>
+						</li>
+					</ul>
+					<form class="navbar-form search" role="search" ">
+						<div class="input-group">
+							<span class="input-group-addon" id="sizing-addon"><span class="fa fa-search"></span></span>
+							<!-- <input id="search-form" type="text" class="form-control text" placeholder="Search" aria-label="Search" aria-describedby="sizing-addon"> -->
+							<div id="search-form" class=""></div>
+						</div>
+					</form>
+					
+				
          </div><!--header-->
     </div> <!--header_outer-->
-
+					
     <div id="nav_outer">
             <ul class="wrapper" id="nav">
                 <li><a href="blogs.jsp?category=1">人物</a>
